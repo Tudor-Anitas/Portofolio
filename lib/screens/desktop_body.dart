@@ -1,19 +1,40 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portofolio/colors.dart';
+import 'package:portofolio/custom_input.dart';
+import 'dart:math';
 
 class DesktopBody extends StatefulWidget {
   @override
   _DesktopBodyState createState() => _DesktopBodyState();
 }
 
-class _DesktopBodyState extends State<DesktopBody> {
+class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStateMixin{
+
+  late AnimationController rotationController;
+  bool isSendButtonHovering = false;
+
+
+  @override
+  void initState() {
+    rotationController = AnimationController(
+        duration: Duration(milliseconds: 500),
+        vsync: this,
+        upperBound: pi * 2
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.of(context).size.width;
     double windowHeight = MediaQuery.of(context).size.height;
+
+    TextEditingController email = TextEditingController();
+    TextEditingController subject = TextEditingController();
+    TextEditingController message = TextEditingController();
 
     return Container(
       color: kJET,
@@ -40,25 +61,42 @@ class _DesktopBodyState extends State<DesktopBody> {
                               children: [
                                 Container(
                                     width: windowWidth,
-                                    child: Text("I'm Tudor", style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
-                                          shadows: [
-                                                Shadow(
-                                                    color: Colors.black54.withOpacity(1),
-                                                    offset: Offset(20.0, 15.0),
-                                                    blurRadius: 6
-                                                )
-                                              ]), textAlign: TextAlign.start,)
-                                ),
-                                Container(
-                                    width: windowWidth,
-                                    child: Text('mobile developer', style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
+                                    child: DefaultTextStyle(
+                                      style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
                                         shadows: [
                                           Shadow(
                                               color: Colors.black54.withOpacity(1),
                                               offset: Offset(20.0, 15.0),
                                               blurRadius: 6
                                           )
-                                        ]), textAlign: TextAlign.start)
+                                        ]), textAlign: TextAlign.start,
+                                      child: AnimatedTextKit(
+                                          animatedTexts: [
+                                            TypewriterAnimatedText("I'm Tudor", speed: Duration(milliseconds: 250))
+                                          ],
+                                          totalRepeatCount: 1,
+                                        ),
+                                      )
+                                ),
+                                Container(
+                                    width: windowWidth,
+                                    child: DefaultTextStyle(
+                                      style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                                color: Colors.black54.withOpacity(1),
+                                                offset: Offset(20.0, 15.0),
+                                                blurRadius: 6
+                                            )
+                                          ]), textAlign: TextAlign.start,
+                                      child: AnimatedTextKit(
+                                        animatedTexts: [
+                                          TypewriterAnimatedText("", speed: Duration(milliseconds: 200)),
+                                          TypewriterAnimatedText("mobile developer", speed: Duration(milliseconds: 200))
+                                        ],
+                                        totalRepeatCount: 1,
+                                      ),
+                                    )
                                 ),
                                 Container(
                                     width: windowWidth,
@@ -129,16 +167,22 @@ class _DesktopBodyState extends State<DesktopBody> {
                           Container(
                               constraints: BoxConstraints(minHeight: 100),
                               width: windowWidth,
-                              child: Text('My Portofolio', 
-                                style: GoogleFonts.raleway(fontSize: 64, color: kJET, fontWeight: FontWeight.bold, 
+                              child: DefaultTextStyle(
+                                style: GoogleFonts.raleway(fontSize: 64, color: kJET, fontWeight: FontWeight.bold,
                                     shadows: [
                                       Shadow(
-                                        color: Colors.black54.withOpacity(0.3),
-                                        offset: Offset(20.0, 15.0),
-                                        blurRadius: 6
+                                          color: Colors.black54.withOpacity(0.3),
+                                          offset: Offset(20.0, 15.0),
+                                          blurRadius: 6
                                       )
-                                    ]), 
-                                textAlign: TextAlign.start, 
+                                    ]),
+                                child: AnimatedTextKit(
+                                  animatedTexts: [
+                                    TyperAnimatedText("", speed: Duration(milliseconds: 300)),
+                                    TyperAnimatedText("My Portofolio", speed: Duration(milliseconds: 100))
+                                  ],
+                                  isRepeatingAnimation: false,
+                                )
                               )
                           ),
                           Container(
@@ -178,7 +222,7 @@ class _DesktopBodyState extends State<DesktopBody> {
                               duration: Duration(milliseconds: 700),
                               height: windowHeight,
                               color: Colors.red[800],
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
                               child: Image(image: AssetImage('Bloodline.png'),),
                           ),
                         ),
@@ -187,6 +231,7 @@ class _DesktopBodyState extends State<DesktopBody> {
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 700),
                             height: windowHeight,
+                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
@@ -194,7 +239,13 @@ class _DesktopBodyState extends State<DesktopBody> {
                                 colors: [kTFTtop, kTFTbottom]
                               )
                             ),
-                            child: Image(image: AssetImage('pingutft.png')),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(flex: 1,child: Image(image: AssetImage('pingutft.png'))),
+                                Expanded(flex: 1,child: Image(image: AssetImage('TFTInfo.png')))
+                              ],
+                            ),
                           ),
                         ),
                         Expanded(
@@ -211,7 +262,7 @@ class _DesktopBodyState extends State<DesktopBody> {
                             duration: Duration(milliseconds: 700),
                             color: Colors.white,
                             height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
                             child: Image(image: AssetImage('golfskins.png')),
                           ),
                         ),
@@ -221,7 +272,7 @@ class _DesktopBodyState extends State<DesktopBody> {
                             duration: Duration(milliseconds: 700),
                             color: Colors.indigo,
                             height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
                             child: Image(image: AssetImage('Inventory.png')),
                           ),
                         ),
@@ -231,7 +282,7 @@ class _DesktopBodyState extends State<DesktopBody> {
                             duration: Duration(milliseconds: 700),
                             color: Colors.yellow,
                             height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
                             child: Image(image: AssetImage('Exchange.png')),
                           ),
                         ),
@@ -256,6 +307,7 @@ class _DesktopBodyState extends State<DesktopBody> {
                   flex: 1,
                   child: Container(
                     height: windowHeight,
+                    constraints: BoxConstraints(minHeight: 500),
                     padding: EdgeInsets.only(left: windowWidth * 0.02),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -420,6 +472,139 @@ class _DesktopBodyState extends State<DesktopBody> {
                         ],
                       ),
                     ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          // ------------------------- Contact me
+          Container(
+            height: windowHeight * 0.5,
+            width: windowWidth,
+            constraints: BoxConstraints(
+              minHeight: 600
+            ),
+            padding: EdgeInsets.only(left: windowWidth* 0.02),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Column(
+                    children: [
+                      // ------------------------- Title
+                      Container(
+                        width: windowWidth,
+                        child: Text('Contact me', style: GoogleFonts.raleway(fontSize: 64, color: Colors.white, fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                              color: Colors.black54.withOpacity(1),
+                              offset: Offset(20.0, 15.0),
+                              blurRadius: 6
+                          )
+                        ]), textAlign: TextAlign.start,),
+                      ),
+                      // ------------------------- Description
+                      Container(
+                          child: Text("I'm always ready to work on new projects and expand my knowledge. If you have any question, request or want"
+                              " to get in touch, complete the form.",
+                              style: GoogleFonts.raleway(fontSize: 20, color: Colors.white)
+                          )
+                      ),
+                    ],
+                  ),
+                ),
+                // ------------------------- Form
+                Expanded(
+                  flex: 12,
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(),
+                        Column(
+                          children: [
+                            // ------------------------- Email
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth: 400
+                              ),
+                              child: Column(
+                                children: [
+                                  CustomInput(
+                                      width: windowWidth,
+                                      height: 50,
+                                      controller: email,
+                                      hint: "Email",
+                                      color: kGrey,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // ------------------------- Subject
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              constraints: BoxConstraints(
+                                  maxWidth: 400
+                              ),
+                              child: Column(
+                                children: [
+                                  CustomInput(
+                                    width: windowWidth,
+                                    height: 50,
+                                    controller: subject,
+                                    hint: "Subject",
+                                    color: kGrey,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // ------------------------- Message
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              constraints: BoxConstraints(
+                                  maxWidth: 400
+                              ),
+                              child: Column(
+                                children: [
+                                  CustomInput(
+                                    width: windowWidth,
+                                    height: 350,
+                                    controller: message,
+                                    hint: "Subject",
+                                    color: kGrey,
+                                    maxLines: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: (){print('sent');},
+                              onHover: (hovering){
+                                setState(() {
+                                  isSendButtonHovering = hovering;
+                                });
+                              },
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.easeInBack,
+                                margin: EdgeInsets.only(top: 20),
+                                width: isSendButtonHovering ? 170 : 150,
+                                height: isSendButtonHovering ? 70 : 50,
+                                child: RotationTransition(
+                                    turns: Tween(begin: 0.0, end: 1.0)
+                                        .animate(rotationController),
+                                    child: ElevatedButton(
+                                      onPressed: (){},
+                                      child: Text('Send'),
+                                    ),
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                        Container(),
+                      ],
+                    ),
                   ),
                 )
               ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color kSEA_GREEN = Color(0xff35F4C8);
 const Color kJET = Color(0xff1d1d1d);
+const Color kGrey = Color(0xff2b2b2b);
 const Color kTFTtop = Color(0xffF00014);
 const Color kTFTbottom = Color(0xff6200EE);
 

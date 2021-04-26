@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,26 +7,83 @@ import 'package:portofolio/colors.dart';
 import 'package:portofolio/custom_input.dart';
 import 'dart:math';
 
+import 'package:portofolio/project_dialog.dart';
+
 class DesktopBody extends StatefulWidget {
   @override
   _DesktopBodyState createState() => _DesktopBodyState();
 }
 
-class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStateMixin{
+class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin{
 
-  late AnimationController rotationController;
+  late AnimationController shakeAndroidController;
+  late Animation<double> shakeAndroidAnimation;
+  late AnimationController shakeFirebaseController;
+  late Animation<double> shakeFirebaseAnimation;
+  late AnimationController shakeJavaController;
+  late Animation<double> shakeJavaAnimation;
+
+  ScrollController scrollController = ScrollController();
+
+  bool isBloodlineHovering = false;
+  bool isTFTHovering = false;
+  bool isPgcHovering = false;
+  bool isGolfSkinsHovering = false;
+  bool isInventoryHovering = false;
+  bool isExchangeHovering = false;
   bool isSendButtonHovering = false;
-
+  bool isScrollCreated = false;
 
   @override
   void initState() {
-    rotationController = AnimationController(
-        duration: Duration(milliseconds: 500),
-        vsync: this,
-        upperBound: pi * 2
-    );
     super.initState();
+
+    // the animation controller for the icons
+    shakeAndroidController = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 700),
+
+    );
+    // updates the view for the animation to be visible
+    shakeAndroidController.addListener(() {
+      setState(() {});
+    });
+    // a tween that applies a curve and sets the limits of the animation
+    shakeAndroidAnimation = Tween<double>(
+        begin: 0.0,
+        end: pi*2 + 0.3
+    ).animate(new CurvedAnimation(
+        parent: shakeAndroidController,
+        curve: Curves.easeInOutQuint
+      )
+    );
+
+    shakeFirebaseController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 700)
+    );
+    shakeFirebaseController.addListener(() {setState(() {});});
+    shakeFirebaseAnimation = Tween<double>(
+      begin: -0.3,
+      end: 0.5
+    ).animate(new CurvedAnimation(parent: shakeFirebaseController, curve: Curves.easeInOutBack));
+
+    shakeJavaController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    shakeJavaController.addListener(() {setState(() {});});
+    shakeJavaAnimation = Tween<double>(
+      begin: 0,
+      end: 20
+    ).animate(new CurvedAnimation(parent: shakeJavaController, curve: Curves.easeOutCubic));
+
+    // check if the widget tree has been build
+    // and if the scroll controller is attached
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      if(scrollController.hasClients)
+        isScrollCreated = true;
+    });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +94,477 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
     TextEditingController subject = TextEditingController();
     TextEditingController message = TextEditingController();
 
+    Dialog bloodlineDialog = Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Container(
+                width: windowWidth,
+                height: windowHeight,
+                child: CarouselSlider(
+                  items: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 6.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        image: DecorationImage(
+                          image: AssetImage('bloodline/bloodlineLogin.jpg')
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 6.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        image: DecorationImage(
+                            image: AssetImage('bloodline/bloodlineRegister.jpg')
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 6.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        image: DecorationImage(
+                            image: AssetImage('bloodline/bloodlineMain.jpg')
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 6.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        image: DecorationImage(
+                            image: AssetImage('bloodline/bloodlinePost.jpg')
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 6.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        image: DecorationImage(
+                            image: AssetImage('bloodline/bloodlineMenu.jpg')
+                        ),
+                      ),
+                    ),
+                  ],
+                  options: CarouselOptions(enlargeCenterPage: true),
+                )
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(right: 20, bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () { Navigator.pop(context);},
+                        color: Colors.blue,
+                        hoverColor: Colors.red[800],
+                        textColor: Colors.white,
+                        child: Text('Close', style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.bold,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    Dialog tftDialog = Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Container(
+                  width: windowWidth,
+                  height: windowHeight,
+                  child: CarouselSlider(
+                    items: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('TFT/tftMain.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('TFT/tftSearch.jpg')
+                          ),
+                        ),
+                      ),
+
+                    ],
+                    options: CarouselOptions(enlargeCenterPage: true),
+                  )
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(right: 20, bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () { Navigator.pop(context);},
+                        color: Colors.blue,
+                        hoverColor: Colors.red[800],
+                        textColor: Colors.white,
+                        child: Text('Close', style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.bold,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    Dialog pgcDialog = Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Container(
+                  width: windowWidth,
+                  height: windowHeight,
+                  child: CarouselSlider(
+                    items: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('pgc/pgcMain.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('pgc/pgcIngredients.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('pgc/pgcCondiments.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('pgc/pgcResults.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('pgc/pgcSettings.jpg')
+                          ),
+                        ),
+                      ),
+
+                    ],
+                    options: CarouselOptions(enlargeCenterPage: true),
+                  )
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(right: 20, bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () { Navigator.pop(context);},
+                        color: Colors.blue,
+                        hoverColor: Colors.red[800],
+                        textColor: Colors.white,
+                        child: Text('Close', style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.bold,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    Dialog golfDialog = Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Container(
+                  width: windowWidth,
+                  height: windowHeight,
+                  child: CarouselSlider(
+                    items: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('golf/login.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('golf/main.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('golf/matches.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('golf/createMatch.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('golf/game.jpg')
+                          ),
+                        ),
+                      ),
+
+                    ],
+                    options: CarouselOptions(enlargeCenterPage: true),
+                  )
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(right: 20, bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () { Navigator.pop(context);},
+                        color: Colors.blue,
+                        hoverColor: Colors.red[800],
+                        textColor: Colors.white,
+                        child: Text('Close', style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.bold,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    Dialog inventoryDialog = Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Container(
+                  width: windowWidth,
+                  height: windowHeight,
+                  child: CarouselSlider(
+                    items: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('inventory/main.jpg')
+                          ),
+                        ),
+                      ),
+                    ],
+                    options: CarouselOptions(enlargeCenterPage: true),
+                  )
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(right: 20, bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () { Navigator.pop(context);},
+                        color: Colors.blue,
+                        hoverColor: Colors.red[800],
+                        textColor: Colors.white,
+                        child: Text('Close', style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.bold,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    Dialog exchangeDialog = Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Container(
+                  width: windowWidth,
+                  height: windowHeight,
+                  child: CarouselSlider(
+                    items: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('exchange/main.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('exchange/menu.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('exchange/graphic.jpg')
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                              image: AssetImage('exchange/list.jpg')
+                          ),
+                        ),
+                      ),
+                    ],
+                    options: CarouselOptions(enlargeCenterPage: true),
+                  )
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(right: 20, bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () { Navigator.pop(context);},
+                        color: Colors.blue,
+                        hoverColor: Colors.red[800],
+                        textColor: Colors.white,
+                        child: Text('Close', style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.bold,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
     return Container(
       color: kJET,
       child: ListView(
         scrollDirection: Axis.vertical,
+        controller: scrollController,
         children: [
           // Name and contact button
           Container(
@@ -124,10 +649,12 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
                                         height: 50,
                                         child: ElevatedButton(
                                             style: ButtonStyle(
-                                              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                                              backgroundColor: MaterialStateProperty.all(Colors.blue),
                                               elevation: MaterialStateProperty.all(20)
                                             ),
-                                            onPressed: (){},
+                                            onPressed: (){
+                                              scrollController.animateTo(windowHeight * 2.8, duration: Duration(seconds: 3), curve: Curves.bounceOut);
+                                            },
                                             child: Text('Contact me!', style: GoogleFonts.raleway(color: Colors.white),)
                                         ),
                                       ),
@@ -139,7 +666,35 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
                             )
                         ),
                       ),
-                      Expanded(flex: 50, child: Container(width: windowWidth, height: windowHeight,))
+                      Expanded(
+                          flex: 50,
+                          child: Container(
+                            width: windowWidth,
+                            height: windowHeight,
+                            child: Column(
+                              children: [
+                                Expanded(flex: 33, child: Container(),),
+                                Expanded(
+                                  flex: 33,
+                                  child: AnimatedOpacity(
+                                    duration: Duration(seconds: 2),
+                                    curve: Curves.easeInCubic,
+                                    opacity: isScrollCreated ? 1 : 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: AssetImage('me.jpg')
+                                        )
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(flex: 33, child: Container(),)
+                              ],
+                            ),
+                          )
+                      )
                     ],
                   )
                   ),
@@ -218,72 +773,129 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
                       children: [
                         Expanded(
                           flex: 1,
-                          child: AnimatedContainer(
-                              duration: Duration(milliseconds: 700),
+                          child: InkWell(
+                            onTap: (){
+                              showDialog(context: context, builder: (context) => bloodlineDialog);
+                            },
+                            onHover: (hover){
+                              setState(() {
+                                isBloodlineHovering = hover;
+                              });
+                            },
+                            child: AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.easeInOutCubic,
+                                height: windowHeight,
+                                color: Colors.red[800],
+                                padding: EdgeInsets.symmetric(horizontal: isBloodlineHovering ? 0 : windowWidth * 0.01),
+                                child: Image(image: AssetImage('Bloodline.png'),),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: InkWell(
+                            onTap: (){showDialog(context: context, builder: (context) => tftDialog);},
+                            onHover: (hover){
+                              setState(() {
+                                isTFTHovering = hover;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOutCubic,
                               height: windowHeight,
-                              color: Colors.red[800],
-                              padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
-                              child: Image(image: AssetImage('Bloodline.png'),),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 700),
-                            height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [kTFTtop, kTFTbottom]
-                              )
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Expanded(flex: 1,child: Image(image: AssetImage('pingutft.png'))),
-                                Expanded(flex: 1,child: Image(image: AssetImage('TFTInfo.png')))
-                              ],
+                              padding: EdgeInsets.symmetric(horizontal: isTFTHovering ? 0 : windowWidth * 0.01),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [kTFTtop, kTFTbottom]
+                                )
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(flex: 1,child: Image(image: AssetImage('pingutft.png'))),
+                                  Expanded(flex: 1,child: Image(image: AssetImage('TFTInfo.png')))
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 700),
-                            color: kPGC,
-                            child: Image(image: AssetImage('pgc.png')),
+                          child: InkWell(
+                            onTap: (){showDialog(context: context, builder: (context) => pgcDialog);},
+                            onHover: (hover){
+                              setState(() {
+                                isPgcHovering = hover;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOutCubic,
+                              color: kPGC,
+                              padding: EdgeInsets.symmetric(horizontal: isPgcHovering ? 0 : windowWidth * 0.01),
+                              child: Image(image: AssetImage('pgc.png')),
+                            ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 700),
-                            color: Colors.white,
-                            height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
-                            child: Image(image: AssetImage('golfskins.png')),
+                          child: InkWell(
+                            onTap: (){showDialog(context: context, builder: (context) => golfDialog);},
+                            onHover: (hover){
+                              setState(() {
+                                isGolfSkinsHovering = hover;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOutCubic,
+                              color: Colors.white,
+                              height: windowHeight,
+                              padding: EdgeInsets.symmetric(horizontal: isGolfSkinsHovering ? 0 : windowWidth * 0.01),
+                              child: Image(image: AssetImage('golfskins.png')),
+                            ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 700),
-                            color: Colors.indigo,
-                            height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
-                            child: Image(image: AssetImage('Inventory.png')),
+                          child: InkWell(
+                            onTap: (){showDialog(context: context, builder: (context) => inventoryDialog);},
+                            onHover: (hover){
+                              setState(() {
+                                isInventoryHovering = hover;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOutCubic,
+                              color: Colors.indigo,
+                              height: windowHeight,
+                              padding: EdgeInsets.symmetric(horizontal: isInventoryHovering ? 0 : windowWidth * 0.01),
+                              child: Image(image: AssetImage('Inventory.png')),
+                            ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 700),
-                            color: Colors.yellow,
-                            height: windowHeight,
-                            padding: EdgeInsets.symmetric(horizontal: windowWidth * 0.01),
-                            child: Image(image: AssetImage('Exchange.png')),
+                          child: InkWell(
+                            onTap: (){showDialog(context: context, builder: (context) => exchangeDialog);},
+                            onHover: (hover){
+                              setState(() {
+                                isExchangeHovering = hover;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOutCubic,
+                              color: Colors.yellow,
+                              height: windowHeight,
+                              padding: EdgeInsets.symmetric(horizontal: isExchangeHovering ? 0 : windowWidth * 0.01),
+                              child: Image(image: AssetImage('Exchange.png')),
+                            ),
                           ),
                         ),
                       ],
@@ -423,52 +1035,102 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
                       // ------------------------- Android
                       Row(
                         children: [
-                          Expanded(flex:5, child: Container()),
+                          Expanded(flex:11, child: Container()),
                           Expanded(
-                            flex: 18,
-                            child: Transform.rotate(
-                              angle: 0.3,
-                              child: Container(
-                                width: windowWidth * 0.1,
-                                height: windowHeight * 0.1,
-                                child: Image(image: AssetImage('android.png'),),
+                            flex: 4,
+                            child: InkWell(
+                              onTap: (){print('hover android'); shakeAndroidController.forward();},
+                              onHover: (hover){
+                                if(hover){
+                                  // start the animation
+                                  shakeAndroidController.forward();
+                                  // after the animation is completed, reset it
+                                  // so it can be done for multiple times
+                                  shakeAndroidController.addStatusListener((status) {
+                                    if(status == AnimationStatus.completed)
+                                      shakeAndroidController.reset();
+                                  });
+                                }
+                              },
+                              child: Transform.rotate(
+                                angle: shakeAndroidAnimation.value + 0.3,
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 500),
+                                  width: windowWidth * 0.1,
+                                  height: windowHeight * 0.1,
+                                  child: Image(image: AssetImage('android.png'),),
+                                ),
                               ),
                             ),
                           ),
+                          Expanded(flex: 6, child: Container(),)
                         ],
                       ),
                       // ------------------------- Firebase
                       Row(
                         children: [
-                          Expanded(flex:0, child: Container()),
+                          Expanded(flex:5, child: Container()),
                           Expanded(
-                            flex: 6,
-                            child: Transform.rotate(
-                              angle: -0.3,
-                              child: Container(
-                                width: windowWidth * 0.1,
-                                height: windowHeight * 0.1,
-                                child: Image(image: AssetImage('firebase.png'),),
+                            flex: 2,
+                            child: InkWell(
+                              onTap: (){print('hover firebase');},
+                              onHover: (hover){
+                                if(hover){
+                                  // start the animation
+                                  shakeFirebaseController.forward();
+                                  // after the animation is completed, reset it
+                                  // so it can be done for multiple times
+                                  shakeFirebaseController.addStatusListener((status) {
+                                    if(status == AnimationStatus.completed)
+                                      shakeFirebaseController.reverse();
+                                  });
+                                }
+                              },
+                              child: Transform.rotate(
+                                angle: shakeFirebaseAnimation.value - 0.3,
+                                child: Container(
+                                  width: windowWidth * 0.1,
+                                  height: windowHeight * 0.1,
+                                  child: Image(image: AssetImage('firebase.png'),),
+                                ),
                               ),
                             ),
                           ),
+                          Expanded(flex: 5, child: Container(),)
                         ],
                       ),
                       // ------------------------- Java
                       Row(
                         children: [
-                          Expanded(flex:5, child: Container()),
+                          Expanded(flex: 11, child: Container()),
                           Expanded(
-                            flex: 18,
-                            child: Transform.rotate(
-                              angle: 0.3,
-                              child: Container(
-                                width: windowWidth * 0.1,
-                                height: windowHeight * 0.1,
-                                child: Image(image: AssetImage('java.png'),),
+                            flex: 6 ,
+                            child: InkWell(
+                              onTap: (){print((windowWidth * 0.005).round());},
+                              onHover: (hover){
+                                if(hover){
+                                  // start the animation
+                                  shakeJavaController.forward();
+                                  // after the animation is completed, reset it
+                                  // so it can be done for multiple times
+                                  shakeJavaController.addStatusListener((status) {
+                                    if(status == AnimationStatus.completed)
+                                      shakeJavaController.reverse();
+                                  });
+                                }
+                              },
+                              child: Transform.rotate(
+                                angle: 0.3,
+                                child: Container(
+                                  width: windowWidth * 0.1,
+                                  height: windowHeight * 0.1,
+                                  margin: EdgeInsets.only(top: shakeJavaAnimation.value),
+                                  child: Image(image: AssetImage('java.png'),),
+                                ),
                               ),
                             ),
                           ),
+                          Expanded(flex: 6, child: Container(),)
                         ],
                       ),
                     ],
@@ -577,29 +1239,22 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
                                 ],
                               ),
                             ),
-                            InkWell(
-                              onTap: (){print('sent');},
-                              onHover: (hovering){
-                                setState(() {
-                                  isSendButtonHovering = hovering;
-                                });
-                              },
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.easeInBack,
-                                margin: EdgeInsets.only(top: 20),
-                                width: isSendButtonHovering ? 170 : 150,
-                                height: isSendButtonHovering ? 70 : 50,
-                                child: RotationTransition(
-                                    turns: Tween(begin: 0.0, end: 1.0)
-                                        .animate(rotationController),
-                                    child: ElevatedButton(
-                                      onPressed: (){},
-                                      child: Text('Send'),
-                                    ),
-                                  ),
-                                )
-                            ),
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInBack,
+                              margin: EdgeInsets.only(top: 20),
+                              width: 150,
+                              height: 50,
+                              child: MaterialButton(
+                                onPressed: (){},
+                                color: Colors.blue,
+                                hoverColor: Colors.green,
+                                animationDuration: Duration(milliseconds: 400),
+                                hoverElevation: 10,
+                                textColor: Colors.white,
+                                child: Text('Send'),
+                              ),
+                              ),
                           ],
                         ),
                         Container(),
@@ -614,4 +1269,5 @@ class _DesktopBodyState extends State<DesktopBody> with SingleTickerProviderStat
       ),
     );
   }
+
 }

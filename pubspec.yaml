@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.0.0
   animated_text_kit: ^4.2.0
+  carousel_slider: ^4.0.0-nullsafety.0
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,7 @@ flutter:
     - assets/Inventory.png
     - assets/Exchange.png
     - assets/TFTInfo.png
+    - assets/me.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -123,7 +123,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: AssetImage('bloodline/bloodlineLogin.jpg')
+                          image: AssetImage('bloodlineLogin.jpg')
                         ),
                       ),
                     ),
@@ -132,7 +132,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                            image: AssetImage('bloodline/bloodlineRegister.jpg')
+                            image: AssetImage('bloodlineRegister.jpg')
                         ),
                       ),
                     ),
@@ -141,7 +141,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                            image: AssetImage('bloodline/bloodlineMain.jpg')
+                            image: AssetImage('bloodlineMain.jpg')
                         ),
                       ),
                     ),
@@ -150,7 +150,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                            image: AssetImage('bloodline/bloodlinePost.jpg')
+                            image: AssetImage('bloodlinePost.jpg')
                         ),
                       ),
                     ),
@@ -159,7 +159,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                            image: AssetImage('bloodline/bloodlineMenu.jpg')
+                            image: AssetImage('bloodlineMenu.jpg')
                         ),
                       ),
                     ),
@@ -212,7 +212,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('TFT/tftMain.jpg')
+                              image: AssetImage('tftMain.jpg')
                           ),
                         ),
                       ),
@@ -221,7 +221,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('TFT/tftSearch.jpg')
+                              image: AssetImage('tftSearch.jpg')
                           ),
                         ),
                       ),
@@ -275,7 +275,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgc/pgcMain.jpg')
+                              image: AssetImage('pgcMain.jpg')
                           ),
                         ),
                       ),
@@ -284,7 +284,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgc/pgcIngredients.jpg')
+                              image: AssetImage('pgcIngredients.jpg')
                           ),
                         ),
                       ),
@@ -293,7 +293,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgc/pgcCondiments.jpg')
+                              image: AssetImage('pgcCondiments.jpg')
                           ),
                         ),
                       ),
@@ -302,7 +302,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgc/pgcResults.jpg')
+                              image: AssetImage('pgcResults.jpg')
                           ),
                         ),
                       ),
@@ -311,7 +311,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgc/pgcSettings.jpg')
+                              image: AssetImage('pgcSettings.jpg')
                           ),
                         ),
                       ),
@@ -365,7 +365,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golf/login.jpg')
+                              image: AssetImage('golflogin.jpg')
                           ),
                         ),
                       ),
@@ -374,7 +374,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golf/main.jpg')
+                              image: AssetImage('golfmain.jpg')
                           ),
                         ),
                       ),
@@ -383,7 +383,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golf/matches.jpg')
+                              image: AssetImage('golfmatches.jpg')
                           ),
                         ),
                       ),
@@ -392,7 +392,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golf/createMatch.jpg')
+                              image: AssetImage('golfcreateMatch.jpg')
                           ),
                         ),
                       ),
@@ -401,7 +401,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golf/game.jpg')
+                              image: AssetImage('golfgame.jpg')
                           ),
                         ),
                       ),
@@ -455,7 +455,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('inventory/main.jpg')
+                              image: AssetImage('inventorymain.jpg')
                           ),
                         ),
                       ),
@@ -508,7 +508,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('exchange/main.jpg')
+                              image: AssetImage('main.jpg')
                           ),
                         ),
                       ),
@@ -517,7 +517,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('exchange/menu.jpg')
+                              image: AssetImage('menu.jpg')
                           ),
                         ),
                       ),
@@ -526,7 +526,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('exchange/graphic.jpg')
+                              image: AssetImage('graphic.jpg')
                           ),
                         ),
                       ),
@@ -535,7 +535,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('exchange/list.jpg')
+                              image: AssetImage('list.jpg')
                           ),
                         ),
                       ),

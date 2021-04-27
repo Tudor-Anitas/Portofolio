@@ -26,10 +26,12 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
+          print(snapshot.error);
           return SomethingWentWrong();
         }
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
+          print(snapshot.connectionState);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Tudor Anițaș',
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
             home: MyHomePage(),
           );
         }
-
+        print('in the initialization');
         // Otherwise, show something whilst waiting for initialization to complete
         return Loading();
       },
@@ -64,6 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    setState(() {});
     return Scaffold(
       backgroundColor: kJET,
       body: ResponsiveLayout(

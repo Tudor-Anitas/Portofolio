@@ -51,19 +51,42 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/android.png
-    - assets/firebase.png
-    - assets/flutter.original.jpg
-    - assets/java.png
-    - assets/rest.png
-    - assets/Bloodline.png
-    - assets/pgc.png
-    - assets/pingutft.png
-    - assets/golfskins.png
-    - assets/Inventory.png
-    - assets/Exchange.png
-    - assets/TFTInfo.png
-    - assets/me.jpg
+    - me.jpg
+    - android.png
+    - firebase.png
+    - java.png
+    - bloodline.jpg
+    - Bloodline.png
+    - Exchange.png
+    - firebase.png
+    - golfskins.png
+    - Inventory.png
+    - pgc.png
+    - pingutft.png
+    - rest.png
+    - TFTInfo.png
+    - bloodlineLogin.jpg
+    - bloodlineMain.jpg
+    - bloodlineMenu.jpg
+    - bloodlinePost.jpg
+    - bloodlineRegister.jpg
+    - graphic.jpg
+    - list.jpg
+    - main.jpg
+    - menu.jpg
+    - golfcreateMatch.jpg
+    - golfgame.jpg
+    - golflogin.jpg
+    - golfmain.jpg
+    - golfmatches.jpg
+    - inventorymain.jpg
+    - pgcCondiments.jpg
+    - pgcIngredients.jpg
+    - pgcMain.jpg
+    - pgcResults.jpg
+    - pgcSettings.jpg
+    - tftMain.jpg
+    - tftSearch.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -2,12 +2,14 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portofolio/colors.dart';
 import 'package:portofolio/custom_input.dart';
+import 'package:portofolio/database.dart';
 import 'dart:math';
 
-import 'package:portofolio/project_dialog.dart';
+import 'package:portofolio/mouse.dart';
 
 class DesktopBody extends StatefulWidget {
   @override
@@ -22,7 +24,8 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
   late Animation<double> shakeFirebaseAnimation;
   late AnimationController shakeJavaController;
   late Animation<double> shakeJavaAnimation;
-
+  late AnimationController pointerSizeController;
+  late Animation<double> pointerAnimation;
   ScrollController scrollController = ScrollController();
 
   bool isBloodlineHovering = false;
@@ -33,6 +36,8 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
   bool isExchangeHovering = false;
   bool isSendButtonHovering = false;
   bool isScrollCreated = false;
+
+  Offset pointerOffset = Offset(0, 0);
 
   @override
   void initState() {
@@ -74,6 +79,12 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
       begin: 0,
       end: 20
     ).animate(new CurvedAnimation(parent: shakeJavaController, curve: Curves.easeOutCubic));
+
+    pointerSizeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    pointerAnimation = CurvedAnimation(
+        curve: Curves.easeInOutCubic,
+        parent: Tween<double>(begin: 0, end: 1).animate(pointerSizeController)
+    );
 
     // check if the widget tree has been build
     // and if the scroll controller is attached
@@ -567,139 +578,179 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
         controller: scrollController,
         children: [
           // Name and contact button
-          Container(
-            width: windowWidth,
-            height: windowHeight,
-            child: Column(
+          MouseRegion(
+            cursor: SystemMouseCursors.none,
+            onHover: (e) => setState(() => pointerOffset = e.localPosition),
+            child: Stack(
               children: [
-                Expanded(flex: 30, child: Container(),),
                 Container(
-                  constraints: BoxConstraints(minHeight: 300),
-                  child: Row(
+                  width: windowWidth,
+                  height: windowHeight,
+                  child: Column(
                     children: [
-                      Expanded(flex: 2, child: Container()),
-                      Expanded(
-                        flex: 48,
-                        child: Container(
-                            width: windowWidth,
-                            child: Column(
-                              children: [
-                                Container(
-                                    width: windowWidth,
-                                    child: DefaultTextStyle(
-                                      style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
-                                        shadows: [
-                                          Shadow(
-                                              color: Colors.black54.withOpacity(1),
-                                              offset: Offset(20.0, 15.0),
-                                              blurRadius: 6
-                                          )
-                                        ]), textAlign: TextAlign.start,
-                                      child: AnimatedTextKit(
-                                          animatedTexts: [
-                                            TypewriterAnimatedText("I'm Tudor", speed: Duration(milliseconds: 250))
-                                          ],
-                                          totalRepeatCount: 1,
-                                        ),
-                                      )
-                                ),
-                                Container(
-                                    width: windowWidth,
-                                    child: DefaultTextStyle(
-                                      style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                                color: Colors.black54.withOpacity(1),
-                                                offset: Offset(20.0, 15.0),
-                                                blurRadius: 6
-                                            )
-                                          ]), textAlign: TextAlign.start,
-                                      child: AnimatedTextKit(
-                                        animatedTexts: [
-                                          TypewriterAnimatedText("", speed: Duration(milliseconds: 200)),
-                                          TypewriterAnimatedText("mobile developer", speed: Duration(milliseconds: 200))
-                                        ],
-                                        totalRepeatCount: 1,
-                                      ),
-                                    )
-                                ),
-                                Container(
-                                    width: windowWidth,
-                                    padding: EdgeInsets.only(top: 50),
-                                    child: Text('freelancer native android & flutter', style: GoogleFonts.raleway(fontSize: 36, color: Colors.grey,
-                                        shadows: [
-                                          Shadow(
-                                              color: Colors.black54.withOpacity(0.5),
-                                              offset: Offset(20.0, 15.0),
-                                              blurRadius: 6
-                                          )
-                                        ]), textAlign: TextAlign.start)
-                                ),
-                                // ------------------------- Contact me button
-                                Container(
+                      Expanded(flex: 30, child: Container(),),
+                      Container(
+                        constraints: BoxConstraints(minHeight: 300),
+                        child: Row(
+                          children: [
+                            Expanded(flex: 2, child: Container()),
+                            // left side with text
+                            Expanded(
+                              flex: 48,
+                              child: Container(
                                   width: windowWidth,
-                                  height: 50,
-                                  margin: EdgeInsets.only(top: 50),
-                                  child: Row(
+                                  child: Column(
                                     children: [
-                                      AnimatedContainer(
-                                        duration: Duration(milliseconds: 700),
-                                        curve: Curves.elasticOut,
-                                        width: 150 ,
-                                        height: 50,
-                                        child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor: MaterialStateProperty.all(Colors.blue),
-                                              elevation: MaterialStateProperty.all(20)
+                                      Container(
+                                          width: windowWidth,
+                                          child: DefaultTextStyle(
+                                            style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
+                                              shadows: [
+                                                Shadow(
+                                                    color: Colors.black54.withOpacity(1),
+                                                    offset: Offset(20.0, 15.0),
+                                                    blurRadius: 6
+                                                )
+                                              ]), textAlign: TextAlign.start,
+                                            child: AnimatedTextKit(
+                                                animatedTexts: [
+                                                  TypewriterAnimatedText("I'm Tudor", speed: Duration(milliseconds: 250))
+                                                ],
+                                                totalRepeatCount: 1,
+                                              ),
+                                            )
+                                      ),
+                                      Container(
+                                          width: windowWidth,
+                                          child: DefaultTextStyle(
+                                            style: GoogleFonts.raleway(fontSize: 80, color: Colors.white, fontWeight: FontWeight.bold,
+                                                shadows: [
+                                                  Shadow(
+                                                      color: Colors.black54.withOpacity(1),
+                                                      offset: Offset(20.0, 15.0),
+                                                      blurRadius: 6
+                                                  )
+                                                ]), textAlign: TextAlign.start,
+                                            child: AnimatedTextKit(
+                                              animatedTexts: [
+                                                TypewriterAnimatedText("", speed: Duration(milliseconds: 200)),
+                                                TypewriterAnimatedText("mobile developer", speed: Duration(milliseconds: 200))
+                                              ],
+                                              totalRepeatCount: 1,
                                             ),
-                                            onPressed: (){
-                                              scrollController.animateTo(windowHeight * 2.8, duration: Duration(seconds: 3), curve: Curves.bounceOut);
-                                            },
-                                            child: Text('Contact me!', style: GoogleFonts.raleway(color: Colors.white),)
+                                          )
+                                      ),
+                                      Container(
+                                          width: windowWidth,
+                                          padding: EdgeInsets.only(top: 50),
+                                          child: Text('freelancer native android & flutter', style: GoogleFonts.raleway(fontSize: 36, color: Colors.grey,
+                                              shadows: [
+                                                Shadow(
+                                                    color: Colors.black54.withOpacity(0.5),
+                                                    offset: Offset(20.0, 15.0),
+                                                    blurRadius: 6
+                                                )
+                                              ]), textAlign: TextAlign.start)
+                                      ),
+                                      // ------------------------- Contact me button
+                                      Container(
+                                        width: windowWidth,
+                                        height: 50,
+                                        margin: EdgeInsets.only(top: 50),
+                                        child: Row(
+                                          children: [
+                                            AnimatedContainer(
+                                              duration: Duration(milliseconds: 700),
+                                              curve: Curves.elasticOut,
+                                              width: 150 ,
+                                              height: 50,
+                                              child: ElevatedButton(
+                                                  style: ButtonStyle(
+                                                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                                    elevation: MaterialStateProperty.all(20)
+                                                  ),
+                                                  onPressed: (){
+                                                    scrollController.animateTo(windowHeight * 2.8, duration: Duration(seconds: 3), curve: Curves.bounceOut);
+                                                  },
+                                                  child: Text('Contact me!', style: GoogleFonts.raleway(color: Colors.white),)
+                                              ),
+                                            ),
+                                            Container()
+                                          ],
                                         ),
                                       ),
-                                      Container()
+                                    ],
+                                  )
+                              ),
+                            ),
+                            // right side with picture
+                            Expanded(
+                                flex: 50,
+                                child: Container(
+                                  width: windowWidth,
+                                  height: windowHeight,
+                                  child: Column(
+                                    children: [
+                                      Expanded(flex: 33, child: Container(),),
+                                      Expanded(
+                                        flex: 33,
+                                        child: AnimatedOpacity(
+                                          duration: Duration(seconds: 2),
+                                          curve: Curves.easeInCubic,
+                                          opacity: isScrollCreated ? 1 : 0,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: AssetImage('me.jpg')
+                                              )
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(flex: 33, child: Container(),)
                                     ],
                                   ),
                                 )
-                              ],
                             )
+                          ],
+                        )
                         ),
-                      ),
                       Expanded(
-                          flex: 50,
-                          child: Container(
-                            width: windowWidth,
-                            height: windowHeight,
-                            child: Column(
-                              children: [
-                                Expanded(flex: 33, child: Container(),),
-                                Expanded(
-                                  flex: 33,
-                                  child: AnimatedOpacity(
-                                    duration: Duration(seconds: 2),
-                                    curve: Curves.easeInCubic,
-                                    opacity: isScrollCreated ? 1 : 0,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: AssetImage('me.jpg')
-                                        )
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(flex: 33, child: Container(),)
-                              ],
-                            ),
-                          )
-                      )
+                        flex: 33,
+                        child: Container(),
+                      ),
                     ],
-                  )
                   ),
-                Expanded(flex: 33, child: Container(),),
-              ],
+                ),
+                // custom cursors animations
+                AnimatedBuilder(
+                    animation: pointerSizeController,
+                    builder: (context, snapshot) {
+                      return AnimatedPointer(
+                        pointerOffset: pointerOffset,
+                        radius: 45 + 100 * pointerAnimation.value,
+                      );
+                    }),
+                AnimatedPointer(
+                    pointerOffset: pointerOffset,
+                    movementDuration: const Duration(milliseconds: 200),
+                    radius: 10,
+                ),
+                Column(
+                  children: [
+                    SizedBox(height: windowHeight * 0.95,),
+                    Container(
+                      padding: EdgeInsets.only(left: windowWidth * 0.02),
+                      child: Transform.rotate(
+                          angle: pi * 1.5,
+                          alignment: Alignment.centerLeft,
+                          child: Container(child: Text('Click and drag ->', style: GoogleFonts.raleway(fontSize: 20, color: Colors.white54)))
+                      ),
+                    ),
+                  ],
+                )
+              ]
             ),
           ),
           // ------------------------- Portofolio
@@ -1246,7 +1297,20 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                               width: 150,
                               height: 50,
                               child: MaterialButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  DatabaseService().sendRequest(
+                                      email.text.trim(),
+                                      subject.text.trim(),
+                                      message.text.trim()
+                                  );
+
+                                  email.clear();
+                                  subject.clear();
+                                  message.clear();
+
+                                  SnackBar snackBar = SnackBar(content: Text('Thank you for the message!'));
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                },
                                 color: Colors.blue,
                                 hoverColor: Colors.green,
                                 animationDuration: Duration(milliseconds: 400),
@@ -1269,5 +1333,4 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
       ),
     );
   }
-
 }

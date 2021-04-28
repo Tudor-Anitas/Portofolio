@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    DatabaseService().addVisitor();
+    //DatabaseService().addVisitor();
   }
 
   @override

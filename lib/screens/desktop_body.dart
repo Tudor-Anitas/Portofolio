@@ -26,6 +26,9 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
   late Animation<double> shakeJavaAnimation;
   late AnimationController pointerSizeController;
   late Animation<double> pointerAnimation;
+  late AnimationController contactColorAnimationController;
+  late Animation<Color?> contactColorAnimation;
+
   ScrollController scrollController = ScrollController();
 
   bool isBloodlineHovering = false;
@@ -85,6 +88,12 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
         curve: Curves.easeInOutCubic,
         parent: Tween<double>(begin: 0, end: 1).animate(pointerSizeController)
     );
+    contactColorAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500) );
+    contactColorAnimationController.addListener(() {setState(() {});});
+    contactColorAnimation = ColorTween(
+      begin: kJET,
+      end: Colors.blueGrey
+    ).animate(new CurvedAnimation(parent: contactColorAnimationController, curve: Curves.easeIn));
 
     // check if the widget tree has been build
     // and if the scroll controller is attached
@@ -107,8 +116,11 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
 
     Dialog bloodlineDialog = Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      backgroundColor: Colors.grey[800],
+      insetAnimationDuration: Duration(milliseconds: 1500),
+      insetAnimationCurve: Curves.easeInQuint,
       child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),),
         child: Column(
           children: [
             Expanded(
@@ -259,6 +271,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
     );
     Dialog pgcDialog = Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      backgroundColor: Colors.grey[800],
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Column(
@@ -439,6 +452,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
     );
     Dialog inventoryDialog = Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      backgroundColor: Colors.grey[800],
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Column(
@@ -503,15 +517,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                   height: windowHeight,
                   child: CarouselSlider(
                     items: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 6.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
-                              image: AssetImage('main.jpg')
-                          ),
-                        ),
-                      ),
+
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 6.0),
                         decoration: BoxDecoration(
@@ -763,7 +769,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
               children: [
                 // ------------------------- Title and description
                 Expanded(
-                  flex: 1,
+                  flex: 11,
                   child: Container(
                       padding: EdgeInsets.only(left: windowWidth * 0.02, bottom: 50),
                       width: windowWidth,
@@ -773,6 +779,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                           Container(
                               constraints: BoxConstraints(minHeight: 100),
                               width: windowWidth,
+                              margin: EdgeInsets.only(top: windowHeight * 0.05),
                               child: DefaultTextStyle(
                                 style: GoogleFonts.raleway(fontSize: 64, color: kJET, fontWeight: FontWeight.bold,
                                     shadows: [
@@ -815,7 +822,7 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
                 ),
                 // ------------------------- Pictures with the projects
                 Expanded(
-                  flex: 1,
+                  flex: 9,
                   child: Container(
                     color: kPGC,
                     constraints: BoxConstraints(minHeight: 300),
@@ -1190,143 +1197,156 @@ class _DesktopBodyState extends State<DesktopBody> with TickerProviderStateMixin
               ],
             ),
           ),
-          // ------------------------- Contact me
-          Container(
-            height: windowHeight * 0.5,
-            width: windowWidth,
-            constraints: BoxConstraints(
-              minHeight: 600
-            ),
-            padding: EdgeInsets.only(left: windowWidth* 0.02),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 8,
-                  child: Column(
-                    children: [
-                      // ------------------------- Title
-                      Container(
-                        width: windowWidth,
-                        child: Text('Contact me', style: GoogleFonts.raleway(fontSize: 64, color: Colors.white, fontWeight: FontWeight.bold,
-                        shadows: [
-                          Shadow(
-                              color: Colors.black54.withOpacity(1),
-                              offset: Offset(20.0, 15.0),
-                              blurRadius: 6
-                          )
-                        ]), textAlign: TextAlign.start,),
-                      ),
-                      // ------------------------- Description
-                      Container(
-                          child: Text("I'm always ready to work on new projects and expand my knowledge. If you have any question, request or want"
-                              " to get in touch, complete the form.",
-                              style: GoogleFonts.raleway(fontSize: 20, color: Colors.white)
-                          )
-                      ),
-                    ],
-                  ),
-                ),
-                // ------------------------- Form
-                Expanded(
-                  flex: 12,
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+          InkWell(
+            onTap: (){print('tapped contact');},
+            onHover: (hover){
+              if(hover)
+                contactColorAnimationController.forward();
+              else if(!hover && contactColorAnimationController.status == AnimationStatus.completed)
+                contactColorAnimationController.reverse();
+            },
+            child: Container(
+              height: windowHeight * 0.7,
+              width: windowWidth,
+              color: contactColorAnimation.value,
+              margin: EdgeInsets.only(top: windowHeight * 0.03),
+              padding: EdgeInsets.only(left: windowWidth* 0.02, top: windowHeight * 0.05),
+              constraints: BoxConstraints(
+                  minHeight: 600
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: Column(
                       children: [
-                        Container(),
-                        Column(
-                          children: [
-                            // ------------------------- Email
-                            Container(
-                              constraints: BoxConstraints(
-                                maxWidth: 400
-                              ),
-                              child: Column(
-                                children: [
-                                  CustomInput(
+                        // ------------------------- Title
+                        Container(
+                          width: windowWidth,
+                          child: Text('Contact me', style: GoogleFonts.raleway(fontSize: 64, color: Colors.white, fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
+                                    color: Colors.black54.withOpacity(1),
+                                    offset: Offset(20.0, 15.0),
+                                    blurRadius: 6
+                                )
+                              ]), textAlign: TextAlign.start,),
+                        ),
+                        // ------------------------- Description
+                        Container(
+                            margin: EdgeInsets.only(top: windowHeight * 0.05),
+                            child: Text("I'm always ready to work on new projects and expand my knowledge. If you have any question, request or want"
+                                " to get in touch, complete the form.",
+                                style: GoogleFonts.raleway(fontSize: 20, color: Colors.white)
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                  // ------------------------- Form
+                  Expanded(
+                    flex: 12,
+                    child: Container(
+                      margin: EdgeInsets.only(top: windowHeight * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(),
+                          Column(
+                            children: [
+                              // ------------------------- Email
+                              Container(
+                                constraints: BoxConstraints(
+                                    maxWidth: 400
+                                ),
+                                child: Column(
+                                  children: [
+                                    CustomInput(
                                       width: windowWidth,
                                       height: 50,
                                       controller: email,
                                       hint: "Email",
                                       color: kGrey,
-                                  ),
-                                ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            // ------------------------- Subject
-                            Container(
-                              margin: EdgeInsets.only(top: 20),
-                              constraints: BoxConstraints(
-                                  maxWidth: 400
+                              // ------------------------- Subject
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                constraints: BoxConstraints(
+                                    maxWidth: 400
+                                ),
+                                child: Column(
+                                  children: [
+                                    CustomInput(
+                                      width: windowWidth,
+                                      height: 50,
+                                      controller: subject,
+                                      hint: "Subject",
+                                      color: kGrey,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Column(
-                                children: [
-                                  CustomInput(
-                                    width: windowWidth,
-                                    height: 50,
-                                    controller: subject,
-                                    hint: "Subject",
-                                    color: kGrey,
-                                  ),
-                                ],
+                              // ------------------------- Message
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                constraints: BoxConstraints(
+                                    maxWidth: 400
+                                ),
+                                child: Column(
+                                  children: [
+                                    CustomInput(
+                                      width: windowWidth,
+                                      height: 350,
+                                      controller: message,
+                                      hint: "Subject",
+                                      color: kGrey,
+                                      maxLines: 20,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            // ------------------------- Message
-                            Container(
-                              margin: EdgeInsets.only(top: 20),
-                              constraints: BoxConstraints(
-                                  maxWidth: 400
-                              ),
-                              child: Column(
-                                children: [
-                                  CustomInput(
-                                    width: windowWidth,
-                                    height: 350,
-                                    controller: message,
-                                    hint: "Subject",
-                                    color: kGrey,
-                                    maxLines: 20,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.easeInBack,
-                              margin: EdgeInsets.only(top: 20),
-                              width: 150,
-                              height: 50,
-                              child: MaterialButton(
-                                onPressed: (){
-                                  DatabaseService().sendRequest(
-                                      email.text.trim(),
-                                      subject.text.trim(),
-                                      message.text.trim()
-                                  );
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.easeInBack,
+                                margin: EdgeInsets.only(top: 20),
+                                width: 150,
+                                height: 50,
+                                child: MaterialButton(
+                                  onPressed: (){
+                                    DatabaseService().sendRequest(
+                                        email.text.trim(),
+                                        subject.text.trim(),
+                                        message.text.trim()
+                                    );
 
-                                  email.clear();
-                                  subject.clear();
-                                  message.clear();
+                                    email.clear();
+                                    subject.clear();
+                                    message.clear();
 
-                                  SnackBar snackBar = SnackBar(content: Text('Thank you for the message!'));
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                },
-                                color: Colors.blue,
-                                hoverColor: Colors.green,
-                                animationDuration: Duration(milliseconds: 400),
-                                hoverElevation: 10,
-                                textColor: Colors.white,
-                                child: Text('Send'),
+                                    SnackBar snackBar = SnackBar(content: Text('Thank you for the message!'));
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  },
+                                  color: Colors.blue,
+                                  hoverColor: Colors.green,
+                                  animationDuration: Duration(milliseconds: 400),
+                                  hoverElevation: 10,
+                                  textColor: Colors.white,
+                                  child: Text('Send'),
+                                ),
                               ),
-                              ),
-                          ],
-                        ),
-                        Container(),
-                      ],
+                            ],
+                          ),
+                          Container(),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           )
         ],

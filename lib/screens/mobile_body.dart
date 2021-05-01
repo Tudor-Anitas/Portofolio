@@ -107,12 +107,12 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
     TextEditingController message = TextEditingController();
 
     Dialog bloodlineDialog = Dialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.05, vertical: windowHeight * 0.05),
       backgroundColor: Colors.grey[800],
-      insetAnimationDuration: Duration(milliseconds: 1500),
-      insetAnimationCurve: Curves.easeInQuint,
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),),
+        width: windowWidth,
+        height: windowHeight,
         child: Column(
           children: [
             Expanded(
@@ -123,11 +123,14 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                   child: CarouselSlider(
                     items: [
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 6.0),
+                        width: windowWidth,
+                        height: windowHeight,
+                        margin: EdgeInsets.symmetric(horizontal: 0.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('bloodlineLogin.jpg')
+                              image: AssetImage('bloodlineLoginPortret.jpg'),
+                              scale: 3.0
                           ),
                         ),
                       ),
@@ -136,7 +139,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('bloodlineRegister.jpg')
+                              image: AssetImage('bloodlineRegisterPortret.jpg')
                           ),
                         ),
                       ),
@@ -145,7 +148,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('bloodlineMain.jpg')
+                              image: AssetImage('bloodlineMainPortret.jpg')
                           ),
                         ),
                       ),
@@ -154,7 +157,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('bloodlinePost.jpg')
+                              image: AssetImage('bloodlinePostPortret.jpg')
                           ),
                         ),
                       ),
@@ -163,12 +166,16 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('bloodlineMenu.jpg')
+                              image: AssetImage('bloodlineMenuPortret.jpg')
                           ),
                         ),
                       ),
                     ],
-                    options: CarouselOptions(enlargeCenterPage: true),
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: windowHeight * 0.7,
+                        aspectRatio: 5/16
+                    ),
                   )
               ),
             ),
@@ -200,6 +207,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
     );
     Dialog tftDialog = Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      backgroundColor: Colors.grey[800],
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Column(
@@ -216,7 +224,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('tftMain.jpg')
+                              image: AssetImage('tftMainPortret.jpg')
                           ),
                         ),
                       ),
@@ -225,13 +233,17 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('tftSearch.jpg')
+                              image: AssetImage('tftSearchPortret.jpg')
                           ),
                         ),
                       ),
 
                     ],
-                    options: CarouselOptions(enlargeCenterPage: true),
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: windowHeight * 0.7,
+                        aspectRatio: 5/16
+                    ),
                   )
               ),
             ),
@@ -280,7 +292,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgcMain.jpg')
+                              image: AssetImage('pgcMainPortret.jpg')
                           ),
                         ),
                       ),
@@ -289,7 +301,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgcIngredients.jpg')
+                              image: AssetImage('pgcIngredientsPortret.jpg')
                           ),
                         ),
                       ),
@@ -298,7 +310,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgcCondiments.jpg')
+                              image: AssetImage('pgcCondimentsPortret.jpg')
                           ),
                         ),
                       ),
@@ -307,7 +319,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgcResults.jpg')
+                              image: AssetImage('pgcResultsPortret.jpg')
                           ),
                         ),
                       ),
@@ -316,13 +328,17 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('pgcSettings.jpg')
+                              image: AssetImage('pgcSettingsPortret.jpg')
                           ),
                         ),
                       ),
 
                     ],
-                    options: CarouselOptions(enlargeCenterPage: true),
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: windowHeight * 0.7,
+                        aspectRatio: 5/16
+                    ),
                   )
               ),
             ),
@@ -354,6 +370,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
     );
     Dialog golfDialog = Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      backgroundColor: Colors.grey[800],
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Column(
@@ -370,7 +387,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golflogin.jpg')
+                              image: AssetImage('golfloginPortret.jpg')
                           ),
                         ),
                       ),
@@ -379,7 +396,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golfmain.jpg')
+                              image: AssetImage('golfmainPortret.jpg')
                           ),
                         ),
                       ),
@@ -388,7 +405,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golfmatches.jpg')
+                              image: AssetImage('golfmatchesPortret.jpg')
                           ),
                         ),
                       ),
@@ -397,7 +414,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golfcreateMatch.jpg')
+                              image: AssetImage('golfcreateMatchPortret.jpg')
                           ),
                         ),
                       ),
@@ -406,13 +423,17 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('golfgame.jpg')
+                              image: AssetImage('golfgamePortret.jpg')
                           ),
                         ),
                       ),
 
                     ],
-                    options: CarouselOptions(enlargeCenterPage: true),
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: windowHeight * 0.7,
+                        aspectRatio: 5/16
+                    ),
                   )
               ),
             ),
@@ -461,12 +482,16 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('inventorymain.jpg')
+                              image: AssetImage('inventorymainPortret.jpg')
                           ),
                         ),
                       ),
                     ],
-                    options: CarouselOptions(enlargeCenterPage: true),
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: windowHeight * 0.7,
+                        aspectRatio: 5/16
+                    ),
                   )
               ),
             ),
@@ -498,6 +523,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
     );
     Dialog exchangeDialog = Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: windowWidth * 0.1, vertical: windowHeight * 0.05),
+      backgroundColor: Colors.grey[800],
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Column(
@@ -515,7 +541,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('menu.jpg')
+                              image: AssetImage('menuPortret.jpg')
                           ),
                         ),
                       ),
@@ -524,7 +550,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('graphic.jpg')
+                              image: AssetImage('graphicPortret.jpg')
                           ),
                         ),
                       ),
@@ -533,12 +559,16 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                              image: AssetImage('list.jpg')
+                              image: AssetImage('listPortret.jpg')
                           ),
                         ),
                       ),
                     ],
-                    options: CarouselOptions(enlargeCenterPage: true),
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: windowHeight * 0.7,
+                        aspectRatio: 5/16
+                    ),
                   )
               ),
             ),
@@ -576,207 +606,143 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
         controller: scrollController,
         children: [
           // Name and contact button
-          MouseRegion(
-            cursor: SystemMouseCursors.none,
-            onHover: (e) => setState(() => pointerOffset = e.localPosition),
-            child: Stack(
-                children: [
-                  Container(
-                    width: windowWidth,
-                    height: windowHeight,
-                    child: Column(
-                      children: [
-                        Expanded(flex: 10, child: Container(),),
-                        // ------------------------- Headers
-                        Expanded(
-                          flex: 20,
-                          child: Container(
-                              constraints: BoxConstraints(minHeight: 200),
-                              child: Row(
-                                children: [
-                                  Expanded(flex: 2, child: Container()),
-                                  // left side with text
-                                  Expanded(
-                                    flex: 48,
-                                    child: Container(
+          Container(
+            width: windowWidth,
+            height: windowHeight,
+            child: Column(
+              children: [
+                Expanded(flex: 10, child: Container(),),
+                // ------------------------- Headers
+                Expanded(
+                  flex: 20,
+                  child: Container(
+                      constraints: BoxConstraints(minHeight: 200),
+                      child: Row(
+                        children: [
+                          Expanded(flex: 2, child: Container()),
+                          // left side with text
+                          Expanded(
+                            flex: 48,
+                            child: Container(
+                                width: windowWidth,
+                                child: Column(
+                                  children: [
+                                    Container(
                                         width: windowWidth,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                                width: windowWidth,
-                                                child: DefaultTextStyle(
-                                                  style: GoogleFonts.raleway(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold,
-                                                      shadows: [
-                                                        Shadow(
-                                                            color: Colors.black54.withOpacity(1),
-                                                            offset: Offset(20.0, 15.0),
-                                                            blurRadius: 6
-                                                        )
-                                                      ]), textAlign: TextAlign.start,
-                                                  child: AnimatedTextKit(
-                                                    animatedTexts: [
-                                                      TypewriterAnimatedText("I'm Tudor", speed: Duration(milliseconds: 250))
-                                                    ],
-                                                    totalRepeatCount: 1,
-                                                  ),
+                                        child: DefaultTextStyle(
+                                          style: GoogleFonts.raleway(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold,
+                                              shadows: [
+                                                Shadow(
+                                                    color: Colors.black54.withOpacity(1),
+                                                    offset: Offset(20.0, 15.0),
+                                                    blurRadius: 6
                                                 )
-                                            ),
-                                            Container(
-                                                width: windowWidth,
-                                                child: DefaultTextStyle(
-                                                  style: GoogleFonts.raleway(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold,
-                                                      shadows: [
-                                                        Shadow(
-                                                            color: Colors.black54.withOpacity(1),
-                                                            offset: Offset(20.0, 15.0),
-                                                            blurRadius: 6
-                                                        )
-                                                      ]), textAlign: TextAlign.start,
-                                                  child: AnimatedTextKit(
-                                                    animatedTexts: [
-                                                      TypewriterAnimatedText("", speed: Duration(milliseconds: 200)),
-                                                      TypewriterAnimatedText("mobile developer", speed: Duration(milliseconds: 200))
-                                                    ],
-                                                    totalRepeatCount: 1,
-                                                  ),
-                                                )
-                                            ),
-                                            Container(
-                                                width: windowWidth,
-                                                padding: EdgeInsets.only(top: 50),
-                                                child: Text('freelancer native android & flutter', style: GoogleFonts.raleway(fontSize: 20, color: Colors.grey,
-                                                    shadows: [
-                                                      Shadow(
-                                                          color: Colors.black54.withOpacity(0.5),
-                                                          offset: Offset(20.0, 15.0),
-                                                          blurRadius: 6
-                                                      )
-                                                    ]), textAlign: TextAlign.start)
-                                            ),
-
-                                          ],
+                                              ]), textAlign: TextAlign.start,
+                                          child: AnimatedTextKit(
+                                            animatedTexts: [
+                                              TypewriterAnimatedText("I'm Tudor", speed: Duration(milliseconds: 250))
+                                            ],
+                                            totalRepeatCount: 1,
+                                          ),
                                         )
                                     ),
-                                  ),
-                                  // right side with picture
-                                  /*Expanded(
-                                      flex: 50,
-                                      child: Container(
+                                    Container(
                                         width: windowWidth,
-                                        height: windowHeight,
-                                        child: Column(
-                                          children: [
-                                            Expanded(flex: 33, child: Container(),),
-                                            Expanded(
-                                              flex: 33,
-                                              child: AnimatedOpacity(
-                                                duration: Duration(seconds: 2),
-                                                curve: Curves.easeInCubic,
-                                                opacity: isScrollCreated ? 1 : 0,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                          image: AssetImage('me.jpg')
-                                                      )
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(flex: 33, child: Container(),)
-                                          ],
-                                        ),
-                                      )
-                                  ) */
-                                ],
-                              )
+                                        child: DefaultTextStyle(
+                                          style: GoogleFonts.raleway(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold,
+                                              shadows: [
+                                                Shadow(
+                                                    color: Colors.black54.withOpacity(1),
+                                                    offset: Offset(20.0, 15.0),
+                                                    blurRadius: 6
+                                                )
+                                              ]), textAlign: TextAlign.start,
+                                          child: AnimatedTextKit(
+                                            animatedTexts: [
+                                              TypewriterAnimatedText("", speed: Duration(milliseconds: 200)),
+                                              TypewriterAnimatedText("mobile developer", speed: Duration(milliseconds: 200))
+                                            ],
+                                            totalRepeatCount: 1,
+                                          ),
+                                        )
+                                    ),
+                                    Container(
+                                        width: windowWidth,
+                                        padding: EdgeInsets.only(top: 50),
+                                        child: Text('freelancer native android & flutter', style: GoogleFonts.raleway(fontSize: 20, color: Colors.grey,
+                                            shadows: [
+                                              Shadow(
+                                                  color: Colors.black54.withOpacity(0.5),
+                                                  offset: Offset(20.0, 15.0),
+                                                  blurRadius: 6
+                                              )
+                                            ]), textAlign: TextAlign.start)
+                                    ),
+
+                                  ],
+                                )
+                            ),
                           ),
+                          // right side with picture
+                        ],
+                      )
+                  ),
+                ),
+                // ------------------------- Me Image
+                Expanded(
+                  flex: 20,
+                  child: Container(
+                    child: AnimatedOpacity(
+                      duration: Duration(seconds: 2),
+                      curve: Curves.easeInCubic,
+                      opacity: isScrollCreated ? 1 : 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: AssetImage('me.jpg')
+                            )
                         ),
-                        // ------------------------- Me Image
-                        Expanded(
-                          flex: 20,
-                          child: Container(
-                            child: AnimatedOpacity(
-                              duration: Duration(seconds: 2),
-                              curve: Curves.easeInCubic,
-                              opacity: isScrollCreated ? 1 : 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage('me.jpg')
-                                    )
-                                ),
+                      ),
+                    ),
+                  ),
+                ),
+                // ------------------------- Contact me button
+                Expanded(
+                  flex: 10,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 50, left: windowWidth * 0.03),
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 700),
+                          curve: Curves.elasticOut,
+                          width: 100 ,
+                          height: 50,
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                  elevation: MaterialStateProperty.all(20)
                               ),
-                            ),
+                              onPressed: (){
+                                scrollController.animateTo(windowHeight * 4.5, duration: Duration(seconds: 3), curve: Curves.easeInQuint);
+                              },
+                              child: Text('Contact me!', style: GoogleFonts.raleway(color: Colors.white, fontSize: 14),)
                           ),
                         ),
-                        // ------------------------- Contact me button
-                        Expanded(
-                          flex: 10,
-                          child: Container(
-                            margin: EdgeInsets.only(top: 50, left: windowWidth * 0.03),
-                            child: Row(
-                              children: [
-                                AnimatedContainer(
-                                  duration: Duration(milliseconds: 700),
-                                  curve: Curves.elasticOut,
-                                  width: 100 ,
-                                  height: 30,
-                                  child: ElevatedButton(
-                                      style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all(Colors.blue),
-                                          elevation: MaterialStateProperty.all(20)
-                                      ),
-                                      onPressed: (){
-                                        scrollController.animateTo(windowHeight * 2.8, duration: Duration(seconds: 3), curve: Curves.bounceOut);
-                                      },
-                                      child: Text('Contact me!', style: GoogleFonts.raleway(color: Colors.white, fontSize: 10),)
-                                  ),
-                                ),
-                                Container()
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(flex: 5, child: Container(),)
+                        Container()
                       ],
                     ),
                   ),
-                  // custom cursors animations
-                  AnimatedBuilder(
-                      animation: pointerSizeController,
-                      builder: (context, snapshot) {
-                        return AnimatedPointer(
-                          pointerOffset: pointerOffset,
-                          radius: 45 + 100 * pointerAnimation.value,
-                        );
-                      }),
-                  AnimatedPointer(
-                    pointerOffset: pointerOffset,
-                    movementDuration: const Duration(milliseconds: 200),
-                    radius: 10,
-                  ),
-                  /*Column(
-                    children: [
-                      SizedBox(height: windowHeight * 0.95,),
-                      Container(
-                        padding: EdgeInsets.only(left: windowWidth * 0.02),
-                        child: Transform.rotate(
-                            angle: pi * 1.5,
-                            alignment: Alignment.centerLeft,
-                            child: Container(child: Text('Click and drag ->', style: GoogleFonts.raleway(fontSize: 20, color: Colors.white54)))
-                        ),
-                      ),
-                    ],
-                  )*/
-                ]
+                ),
+                Expanded(flex: 5, child: Container(),)
+              ],
             ),
           ),
           // ------------------------- Portofolio
           Container(
             width: windowWidth,
-            height: windowHeight * 1.3,
+            height: windowHeight * 1.5,
             constraints: BoxConstraints(minHeight: 700),
             color: Colors.white,
             child: Column(
@@ -821,7 +787,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                                   padding: EdgeInsets.only(top: 20),
                                   width: windowWidth * 0.6,
                                   child: Text("Here are some projects I have been working on, starting from the wireframe with pencil and paper, building UI, testing for the smoothest experience and creating the final product",
-                                    style: GoogleFonts.raleway(fontSize: 14, color: Colors.black),
+                                    style: GoogleFonts.raleway(fontSize: 18, color: Colors.black),
                                     textAlign: TextAlign.start,
                                   ),
                                 ),
@@ -1004,254 +970,265 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
           ),
           // ------------------------- Technologies i'm into
           Container(
-            height: windowHeight * 1.3,
+            height: windowHeight * 1.7,
             width: windowWidth,
             constraints: BoxConstraints(
-                minHeight: 800
+                minHeight: 1200
             ),
             child: Column(
               children: [
                 // ------------------------- Description
-                Container(
-                  constraints: BoxConstraints(minHeight: 500),
-                  padding: EdgeInsets.only(left: windowWidth * 0.05, right: windowWidth * 0.05, top: windowHeight * 0.05),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: windowWidth,
-                        child: Text('What I enjoy', style: GoogleFonts.raleway(fontSize: 34, color: Colors.amber, fontWeight: FontWeight.bold,
-                            shadows: [
-                              Shadow(
-                                  color: Colors.black54.withOpacity(1),
-                                  offset: Offset(20.0, 15.0),
-                                  blurRadius: 6
-                              )
-                            ]), textAlign: TextAlign.start,),
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                              width: windowWidth,
-                              child: RichText(
-                                text: TextSpan(
-                                    text: 'My passion for the mobile development started in the second year of faculty where I was first introduced to this domain. Since then, I worked on multiple projects, learning how to build native ',
-                                    style: GoogleFonts.raleway(fontSize: 14, color: Colors.white),
-                                    children: <TextSpan>[
-                                      TextSpan(text: 'android', style: GoogleFonts.montserratAlternates(fontSize: 14, color: kAndroid)),
-                                      TextSpan(text: ' applications that respect all the mordern guidelines.')
-                                    ]
-                                ),
-                              )
-                          ),
-                          Text(''),
-                          Container(
-                              width: windowWidth,
-                              child: RichText(
-                                text: TextSpan(
-                                    text: 'The main language I used for the projects was ',
-                                    style: GoogleFonts.raleway(fontSize: 14, color: Colors.white),
-                                    children: [
-                                      TextSpan(text: 'Java', style: GoogleFonts.lato(fontSize: 14, color: kJava, fontWeight: FontWeight.w700)),
-                                      TextSpan(text: ', perfecting my knowledge, I learned how to implement and use an API, manipulate with data '
-                                          'provided by it. I have worked with different kind of databases, both SQL and noSQL, some examples being ',),
-                                      TextSpan(text: 'My', style: GoogleFonts.orbitron(fontSize: 12, color: kMySql1)),
-                                      TextSpan(text: 'SQL', style: GoogleFonts.orbitron(fontSize: 12, color: kMySql2)),
-                                      TextSpan(text: ', ',),
-                                      TextSpan(text: 'SQLite', style: GoogleFonts.oldStandardTt(fontSize: 14, color: kMySql2)),
-                                      TextSpan(text: ' and '),
-                                      TextSpan(text: 'Firebase', style: GoogleFonts.montserrat(fontSize: 14, color: Colors.amber)),
-                                      TextSpan(text: ','),
-                                      TextSpan(text: ' with the latter also creating authentication systems with email, '),
-                                      TextSpan(text: 'G', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleBlue)),
-                                      TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleRed)),
-                                      TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleYellow)),
-                                      TextSpan(text: 'g', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleBlue)),
-                                      TextSpan(text: 'l', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleGreen)),
-                                      TextSpan(text: 'e', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleRed)),
-                                      TextSpan(text: ' and '),
-                                      TextSpan(text: 'Facebook', style: GoogleFonts.ptSans(fontSize: 14, color: kFacebook, fontWeight: FontWeight.w700)),
-                                      TextSpan(text: ' tokens.')
-                                    ]
-                                ),
-                              )
-
-                          ),
-                          Text(''),
-                          Container(
-                              width: windowWidth,
-                              child: RichText(
-                                text: TextSpan(
-                                    text: 'From October 2020, I started learning ',
-                                    style: GoogleFonts.raleway(fontSize: 14, color: Colors.white),
-                                    children: [
-                                      TextSpan(text: 'Flutter', style: GoogleFonts.montserrat(fontSize: 14, color: kFlutter)),
-                                      TextSpan(text: ', a UI sdk created by '),
-                                      TextSpan(text: 'G', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleBlue)),
-                                      TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleRed)),
-                                      TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleYellow)),
-                                      TextSpan(text: 'g', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleBlue)),
-                                      TextSpan(text: 'l', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleGreen)),
-                                      TextSpan(text: 'e', style: GoogleFonts.montserrat(fontSize: 14, color: kGoogleRed)),
-                                      TextSpan(text: ' to develop applications for Android, iOS, Desktop and Web '
-                                          '(like this website which was created in '),
-                                      TextSpan(text: 'Flutter', style: GoogleFonts.montserrat(fontSize: 14, color: kFlutter)),
-                                      TextSpan(text: '!).'),
-                                      TextSpan(text: ' After learning about the state management, '),
-                                      TextSpan(text: 'REST api', style: GoogleFonts.montserrat(fontSize: 14, color: Colors.green)),
-                                      TextSpan(text: ', connecting databases, animations and best practices, I have done my bachelor degree project with this framework.')
-                                    ]
-                                ),
-                              )
-                          ),
-                          Text(''),
-                          Container(
-                            width: windowWidth,
-                            child: Text('At the beginning of the year 2021 I started being a freelancer, accomplishing multiple projects from people around the world! Of course, '
-                                'using native Java and Flutter.'
-                              , style: GoogleFonts.raleway(fontSize: 14, color: Colors.white),
-                              textAlign: TextAlign.start,
+                Expanded(
+                  flex: 32,
+                  child: Container(
+                    constraints: BoxConstraints(minHeight: 650),
+                    padding: EdgeInsets.only(left: windowWidth * 0.05, right: windowWidth * 0.05, top: windowHeight * 0.05),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: windowWidth,
+                          child: Text('What I enjoy', style: GoogleFonts.raleway(fontSize: 34, color: Colors.amber, fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
+                                    color: Colors.black54.withOpacity(1),
+                                    offset: Offset(20.0, 15.0),
+                                    blurRadius: 6
+                                )
+                              ]), textAlign: TextAlign.start,),
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                                width: windowWidth,
+                                margin: EdgeInsets.only(top: 20),
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'My passion for the mobile development started in the second year of faculty where I was first introduced to this domain. Since then, I worked on multiple projects, learning how to build native ',
+                                      style: GoogleFonts.raleway(fontSize: 18, color: Colors.white),
+                                      children: <TextSpan>[
+                                        TextSpan(text: 'android', style: GoogleFonts.montserratAlternates(fontSize: 14, color: kAndroid)),
+                                        TextSpan(text: ' applications that respect all the mordern guidelines.')
+                                      ]
+                                  ),
+                                )
                             ),
-                          ),
-                        ],
-                      ),
+                            Text(''),
+                            Container(
+                                width: windowWidth,
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'The main language I used for the projects was ',
+                                      style: GoogleFonts.raleway(fontSize: 18, color: Colors.white),
+                                      children: [
+                                        TextSpan(text: 'Java', style: GoogleFonts.lato(fontSize: 18, color: kJava, fontWeight: FontWeight.w700)),
+                                        TextSpan(text: ', perfecting my knowledge, I learned how to implement and use an API, manipulate with data '
+                                            'provided by it. I have worked with different kind of databases, both SQL and noSQL, some examples being ',),
+                                        TextSpan(text: 'My', style: GoogleFonts.orbitron(fontSize: 14, color: kMySql1)),
+                                        TextSpan(text: 'SQL', style: GoogleFonts.orbitron(fontSize: 14, color: kMySql2)),
+                                        TextSpan(text: ', ',),
+                                        TextSpan(text: 'SQLite', style: GoogleFonts.oldStandardTt(fontSize: 18, color: kMySql2)),
+                                        TextSpan(text: ' and '),
+                                        TextSpan(text: 'Firebase', style: GoogleFonts.montserrat(fontSize: 18, color: Colors.amber)),
+                                        TextSpan(text: ','),
+                                        TextSpan(text: ' with the latter also creating authentication systems with email, '),
+                                        TextSpan(text: 'G', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleBlue)),
+                                        TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleRed)),
+                                        TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleYellow)),
+                                        TextSpan(text: 'g', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleBlue)),
+                                        TextSpan(text: 'l', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleGreen)),
+                                        TextSpan(text: 'e', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleRed)),
+                                        TextSpan(text: ' and '),
+                                        TextSpan(text: 'Facebook', style: GoogleFonts.ptSans(fontSize: 18, color: kFacebook, fontWeight: FontWeight.w700)),
+                                        TextSpan(text: ' tokens.')
+                                      ]
+                                  ),
+                                )
 
-                    ],
+                            ),
+                            Text(''),
+                            Container(
+                                width: windowWidth,
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'From October 2020, I started learning ',
+                                      style: GoogleFonts.raleway(fontSize: 18, color: Colors.white),
+                                      children: [
+                                        TextSpan(text: 'Flutter', style: GoogleFonts.montserrat(fontSize: 18, color: kFlutter)),
+                                        TextSpan(text: ', a UI sdk created by '),
+                                        TextSpan(text: 'G', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleBlue)),
+                                        TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleRed)),
+                                        TextSpan(text: 'o', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleYellow)),
+                                        TextSpan(text: 'g', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleBlue)),
+                                        TextSpan(text: 'l', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleGreen)),
+                                        TextSpan(text: 'e', style: GoogleFonts.montserrat(fontSize: 18, color: kGoogleRed)),
+                                        TextSpan(text: ' to develop applications for Android, iOS, Desktop and Web '
+                                            '(like this website which was created in '),
+                                        TextSpan(text: 'Flutter', style: GoogleFonts.montserrat(fontSize: 18, color: kFlutter)),
+                                        TextSpan(text: '!).'),
+                                        TextSpan(text: ' After learning about the state management, '),
+                                        TextSpan(text: 'REST api', style: GoogleFonts.montserrat(fontSize: 18, color: Colors.green)),
+                                        TextSpan(text: ', connecting databases, animations and best practices, I have done my bachelor degree project with this framework.')
+                                      ]
+                                  ),
+                                )
+                            ),
+                            Text(''),
+                            Container(
+                              width: windowWidth,
+
+                              child: Text('At the beginning of the year 2021 I started being a freelancer, accomplishing multiple projects from people around the world! Of course, '
+                                  'using native Java and Flutter.'
+                                , style: GoogleFonts.raleway(fontSize: 18, color: Colors.white),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 // ------------------------- Pictures
-                Container(
-                  padding: EdgeInsets.only(top: 30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // ------------------------- Android
-                      Row(
-                        children: [
-                          Expanded(flex:10, child: Container()),
-                          Expanded(
-                            flex: 4,
-                            child: InkWell(
-                              onTap: (){print('hover android'); shakeAndroidController.forward();},
-                              onHover: (hover){
-                                if(hover){
-                                  // start the animation
-                                  shakeAndroidController.forward();
-                                  // after the animation is completed, reset it
-                                  // so it can be done for multiple times
-                                  shakeAndroidController.addStatusListener((status) {
-                                    if(status == AnimationStatus.completed)
-                                      shakeAndroidController.reset();
-                                  });
-                                }
-                              },
-                              child: Transform.rotate(
-                                angle: shakeAndroidAnimation.value + 0.3,
-                                child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 500),
-                                  width: windowWidth * 0.1,
-                                  height: windowHeight * 0.1,
-                                  child: Image(image: AssetImage('android.png'),),
+                Expanded(
+                  flex: 9,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 30),
+                    constraints: BoxConstraints(minHeight: 300),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // ------------------------- Android
+                        Row(
+                          children: [
+                            Expanded(flex:10, child: Container()),
+                            Expanded(
+                              flex: 4,
+                              child: InkWell(
+                                onTap: (){print('hover android'); shakeAndroidController.forward();},
+                                onHover: (hover){
+                                  if(hover){
+                                    // start the animation
+                                    shakeAndroidController.forward();
+                                    // after the animation is completed, reset it
+                                    // so it can be done for multiple times
+                                    shakeAndroidController.addStatusListener((status) {
+                                      if(status == AnimationStatus.completed)
+                                        shakeAndroidController.reset();
+                                    });
+                                  }
+                                },
+                                child: Transform.rotate(
+                                  angle: shakeAndroidAnimation.value + 0.3,
+                                  child: AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
+                                    width: windowWidth * 0.1,
+                                    height: windowHeight * 0.1,
+                                    child: Image(image: AssetImage('android.png'),),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(flex: 7, child: Container(),)
-                        ],
-                      ),
-                      // ------------------------- Firebase
-                      Row(
-                        children: [
-                          Expanded(flex:4, child: Container()),
-                          Expanded(
-                            flex: 2,
-                            child: InkWell(
-                              onTap: (){
-                                shakeFirebaseController.forward();
-                                shakeFirebaseController.addStatusListener((status) {
-                                  if(status == AnimationStatus.completed)
-                                    shakeFirebaseController.reverse();
-                                });
-                              },
-                              onHover: (hover){
-                                if(hover){
-                                  // start the animation
+                            Expanded(flex: 7, child: Container(),)
+                          ],
+                        ),
+                        // ------------------------- Firebase
+                        Row(
+                          children: [
+                            Expanded(flex:4, child: Container()),
+                            Expanded(
+                              flex: 2,
+                              child: InkWell(
+                                onTap: (){
                                   shakeFirebaseController.forward();
-                                  // after the animation is completed, reset it
-                                  // so it can be done for multiple times
                                   shakeFirebaseController.addStatusListener((status) {
                                     if(status == AnimationStatus.completed)
                                       shakeFirebaseController.reverse();
                                   });
-                                }
-                              },
-                              child: Transform.rotate(
-                                angle: shakeFirebaseAnimation.value - 0.3,
-                                child: Container(
-                                  width: windowWidth * 0.1,
-                                  height: windowHeight * 0.1,
-                                  child: Image(image: AssetImage('firebase.png'),),
+                                },
+                                onHover: (hover){
+                                  if(hover){
+                                    // start the animation
+                                    shakeFirebaseController.forward();
+                                    // after the animation is completed, reset it
+                                    // so it can be done for multiple times
+                                    shakeFirebaseController.addStatusListener((status) {
+                                      if(status == AnimationStatus.completed)
+                                        shakeFirebaseController.reverse();
+                                    });
+                                  }
+                                },
+                                child: Transform.rotate(
+                                  angle: shakeFirebaseAnimation.value - 0.3,
+                                  child: Container(
+                                    width: windowWidth * 0.1,
+                                    height: windowHeight * 0.1,
+                                    child: Image(image: AssetImage('firebase.png'),),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(flex: 6, child: Container(),)
-                        ],
-                      ),
-                      // ------------------------- Java
-                      Row(
-                        children: [
-                          Expanded(flex: 10, child: Container()),
-                          Expanded(
-                            flex: 6 ,
-                            child: InkWell(
-                              onTap: (){
-                                shakeJavaController.forward();
-                                shakeJavaController.addStatusListener((status) {
-                                  if(status == AnimationStatus.completed)
-                                    shakeJavaController.reverse();
-                                });
-                                },
-                              onHover: (hover){
-                                if(hover){
-                                  // start the animation
+                            Expanded(flex: 6, child: Container(),)
+                          ],
+                        ),
+                        // ------------------------- Java
+                        Row(
+                          children: [
+                            Expanded(flex: 10, child: Container()),
+                            Expanded(
+                              flex: 6 ,
+                              child: InkWell(
+                                onTap: (){
                                   shakeJavaController.forward();
-                                  // after the animation is completed, reset it
-                                  // so it can be done for multiple times
                                   shakeJavaController.addStatusListener((status) {
                                     if(status == AnimationStatus.completed)
                                       shakeJavaController.reverse();
                                   });
-                                }
-                              },
-                              child: Transform.rotate(
-                                angle: 0.3,
-                                child: Container(
-                                  width: windowWidth * 0.1,
-                                  height: windowHeight * 0.1,
-                                  margin: EdgeInsets.only(top: shakeJavaAnimation.value),
-                                  child: Image(image: AssetImage('java.png'),),
+                                  },
+                                onHover: (hover){
+                                  if(hover){
+                                    // start the animation
+                                    shakeJavaController.forward();
+                                    // after the animation is completed, reset it
+                                    // so it can be done for multiple times
+                                    shakeJavaController.addStatusListener((status) {
+                                      if(status == AnimationStatus.completed)
+                                        shakeJavaController.reverse();
+                                    });
+                                  }
+                                },
+                                child: Transform.rotate(
+                                  angle: 0.3,
+                                  child: Container(
+                                    width: windowWidth * 0.1,
+                                    height: windowHeight * 0.1,
+                                    margin: EdgeInsets.only(top: shakeJavaAnimation.value),
+                                    child: Image(image: AssetImage('java.png'),),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(flex: 7, child: Container(),)
-                        ],
-                      ),
-                    ],
+                            Expanded(flex: 7, child: Container(),)
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 // ------------------------- Tap me
-                Container(
-                  margin: EdgeInsets.only(top: 50),
-                  child: Text("Tap me!", style: GoogleFonts.raleway(fontSize: 14, color: Colors.grey)),
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child: Text("Tap the icons!", style: GoogleFonts.raleway(fontSize: 14, color: Colors.grey)),
+                  ),
                 )
               ],
             ),
           ),
-
+          // ------------------------- Contact me
           Container(
-            height: windowHeight * 1.1,
+            height: windowHeight * 1,
             width: windowWidth,
             color: Colors.blueGrey,
             margin: EdgeInsets.only(top: windowHeight * 0.03),
@@ -1283,7 +1260,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                           margin: EdgeInsets.only(top: windowHeight * 0.05),
                           child: Text("I'm always ready to work on new projects and expand my knowledge. If you have any question, request or want"
                               " to get in touch, complete the form.",
-                              style: GoogleFonts.raleway(fontSize: 14, color: Colors.white)
+                              style: GoogleFonts.raleway(fontSize: 18, color: Colors.white)
                           )
                       ),
                     ],
@@ -1293,7 +1270,7 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                 Expanded(
                   flex: 3,
                   child: Container(
-                    //margin: EdgeInsets.only(top: windowHeight * 0.03),
+                    margin: EdgeInsets.only(top: windowHeight * 0.01),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -1371,18 +1348,33 @@ class _MobileBodyState extends State<MobileBody> with TickerProviderStateMixin {
                               height: 50,
                               child: MaterialButton(
                                 onPressed: (){
-                                  DatabaseService().sendRequest(
-                                      email.text.trim(),
-                                      subject.text.trim(),
-                                      message.text.trim()
-                                  );
 
-                                  email.clear();
-                                  subject.clear();
-                                  message.clear();
+                                  if(
+                                    email.text.isEmpty ||
+                                    subject.text.isEmpty ||
+                                    message.text.isEmpty
+                                  ) {
+                                    SnackBar snackBar = SnackBar(content: Text(
+                                        'Complete all fields first!'));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        snackBar);
+                                  }
+                                  else {
+                                    DatabaseService().sendRequest(
+                                        email.text.trim(),
+                                        subject.text.trim(),
+                                        message.text.trim()
+                                    );
 
-                                  SnackBar snackBar = SnackBar(content: Text('Thank you for the message!'));
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    email.clear();
+                                    subject.clear();
+                                    message.clear();
+
+                                    SnackBar snackBar = SnackBar(content: Text(
+                                        'Thank you for the message!'));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        snackBar);
+                                  }
                                 },
                                 color: Colors.blue,
                                 hoverColor: Colors.green,

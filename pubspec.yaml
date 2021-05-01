@@ -66,27 +66,49 @@ flutter:
     - rest.png
     - TFTInfo.png
     - bloodlineLogin.jpg
+    - bloodlineLoginPortret.jpg
     - bloodlineMain.jpg
+    - bloodlineMainPortret.jpg
     - bloodlineMenu.jpg
+    - bloodlineMenuPortret.jpg
     - bloodlinePost.jpg
+    - bloodlinePostPortret.jpg
     - bloodlineRegister.jpg
+    - bloodlineRegisterPortret.jpg
     - graphic.jpg
+    - graphicPortret.jpg
     - list.jpg
+    - listPortret.jpg
     - main.jpg
+    - mainPortret.jpg
     - menu.jpg
+    - menuPortret.jpg
     - golfcreateMatch.jpg
+    - golfcreateMatchPortret.jpg
     - golfgame.jpg
+    - golfgamePortret.jpg
     - golflogin.jpg
+    - golfloginPortret.jpg
     - golfmain.jpg
+    - golfmainPortret.jpg
     - golfmatches.jpg
+    - golfmatchesPortret.jpg
     - inventorymain.jpg
+    - inventorymainPortret.jpg
     - pgcCondiments.jpg
+    - pgcCondimentsPortret.jpg
     - pgcIngredients.jpg
+    - pgcIngredientsPortret.jpg
     - pgcMain.jpg
+    - pgcMainPortret.jpg
     - pgcResults.jpg
+    - pgcResultsPortret.jpg
     - pgcSettings.jpg
+    - pgcSettingsPortret.jpg
     - tftMain.jpg
+    - tftMainPortret.jpg
     - tftSearch.jpg
+    - tftSearchPortret.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
